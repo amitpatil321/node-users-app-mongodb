@@ -1,0 +1,23 @@
+{
+  "name": "mongodbdemo",
+  "version": "1.0.0",
+  "description": "Example demonstrating how to use mongo db with nodejs and express",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "mongodb": "^2.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "mongodb",
+    "express"
+  ],
+  "author": "Amit Patil",
+  "license": "MIT"
+}

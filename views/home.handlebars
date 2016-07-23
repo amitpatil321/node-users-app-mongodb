@@ -1,0 +1,33 @@
+<div calss="container">
+	<a href="/add" class="ui button positive">Add User</a>
+	<table class="ui celled table">
+	  <thead>
+	    <tr>
+	      <th width="10%">Id</th>
+	      <th width="20%">Name</th>
+	      <th width="30%">Email</th>
+	      <th width="20%">City</th>
+	      <th width="20%">Actions</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		{{#each rows}}
+			<tr>
+				{{#with this}}
+					<td>{{@index}}</td>
+					<td>{{name}}</td>
+					<td>{{email}}</td>
+					<td>{{city}}</td>
+				{{/with}}	
+			    <td>
+					<div class="ui buttons">
+					  <a href="/edit/{{this._id}}" class="ui teal button"><i class="icon pencil"></i></a>
+					  <div class="or"></div>
+					  <a href="javascript:;" onClick="deleteUser('{{this._id}}')" class="ui red button"><i class="icon trash"></i></a>
+					</div>
+			    </td>				
+			</tr>    
+		{{/each}}
+	  </tbody>
+	</table>
+</div>	

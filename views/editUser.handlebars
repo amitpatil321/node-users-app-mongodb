@@ -1,0 +1,38 @@
+<div class="ui grid">
+  <div class="six wide column ui segment">
+    {{#if user.id}}
+    <h3>Update User</h3>
+    {{else}}
+    <h3>Add User</h3>
+    {{/if}}  
+    <br>    
+    <form class="ui form" method="post" action="/edit">
+      <div class="field">
+        <label>First Name</label>
+        <div class="ui left icon input">
+          <input name="name" placeholder="Full Name" type="text" value="{{user.name}}">
+          <i class="user icon"></i>
+        </div>        
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <div class="ui left icon input">
+          <input name="email" placeholder="Email" type="email" value="{{user.email}}">
+          <i class="mail icon"></i>
+        </div>          
+      </div>      
+      <div class="field">
+        <label>City</label>
+        <div class="ui left icon input">
+          <input name="city" placeholder="City" type="text" value="{{user.city}}">
+          <i class="globe icon"></i>
+        </div>          
+      </div>
+
+      <input type="hidden" name="uid" value="{{user._id}}">
+      <button class="ui button positive" type="submit">Submit</button>
+      <a class="ui button" href="/">Cancel</a>
+    </form>
+  </div>
+  <div class="two wide column"></div>
+</div>      
