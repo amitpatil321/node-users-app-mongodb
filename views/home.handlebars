@@ -1,5 +1,14 @@
-<div calss="container">
-	<a href="/add" class="ui button positive">Add User</a>
+<div calss="container piled segment">
+	<div class="ui right aligned">
+		{{#if user}}
+	   	Welcome {{user}}
+	    <a href="/logout" class="ui button teal">Logout</a>
+	    {{/if}}
+	</div>
+	<div class="ui left aligned">
+		<a href="/add" class="ui button positive">Add User</a>
+	</div>
+
 	<table class="ui celled table">
 	  <thead>
 	    <tr>

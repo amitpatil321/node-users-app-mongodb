@@ -1,37 +1,125 @@
+var bcrypt = require('bcryptjs');
 var mongodb = require('mongodb');
 var mongoclient = mongodb.MongoClient;
-
+var SALT = 10;
 // configure database
-var db = [];
+var db = []; 
 mongoclient.connect("mongodb://127.0.0.1/",function(err,dbobj){
 	if(err) console.log("Cant connect to database");
 	console.log("Database connection successful!");
 	db = dbobj.db("users");
 });
 
+// pre save event
+
 exports.home = function(req,res){
 	var errmsg = [];
 	var rows = [];
+	// req.session.destroy();
+	// Check if user is logged in?
+	if(req.session.sessuser == undefined){
+		res.redirect("/login");
+	}else{	
+		db.collection("users").find().toArray(function(err, results) {
+			//if(err) console.log(err);
+			console.log(req.session.sessuser);
+		    res.render("home.handlebars",{rows: results, user: req.session.sessuser});
+		});
+	}
+}
 
-	db.collection("users").find().toArray(function(err, results) {
-	    res.render("home.handlebars",{rows: results});
+// Show login screen
+exports.login = function(req,res){
+	// If user already logged in then go to home page
+	if(req.session.sessuser){
+		res.redirect("/");
+	}else
+		res.render("login.handlebars");
+}
+
+// Logout user
+exports.logout = function(req,res){
+	// destroy user session
+	req.session.destroy();
+	res.redirect("/login");
+}
+
+// Validate user login details
+exports.loginSubmit = function(req,res){
+	var username = req.body.username;
+	var password = req.body.password;
+	var errMsg = "";
+	//console.log(username+"=="+password);
+	db.collection('loginUsers').findOne({'username':username}, function(err,user){
+		//if(err) console.log(user);
+
+		// if user does not exists then show error and exit
+		if(user == null){
+			errMsg = "Invalid username or password";
+			res.render("login.handlebars",{'errMsg': errMsg});
+		}
+		else{
+			bcrypt.compare(password, user.password, function(error, matched) {
+				if(err)
+					errMsg = "Unexpected error";
+				else{
+					if(!matched)
+						errMsg = "Invalid username or password";
+					else{
+						req.session.sessuser = user.name;
+					}
+				}
+				if(errMsg){
+					console.log("failed");
+					res.render("login.handlebars",{'errMsg': errMsg});
+				}
+				else{
+					console.log("success");
+					res.redirect("/");					
+				}
+			});
+		}
+	});
+}
+
+// Show register form
+exports.registerUser = function(req,res){
+	res.render("register.handlebars");
+}
+
+// Save user to database
+exports.registerSubmit = function(req,res){
+	// Generate bcrypt hash key
+	var name	 = req.body.name;
+	var username = req.body.username;
+	var password = req.body.password;
+
+	bcrypt.genSalt(SALT, function(err, salt) {
+	        if (err) return next(err);
+	        // hash the password using our new salt
+	        bcrypt.hash(password, salt, function(err, hash) {
+	            if (err) return next(err);
+	            // override the cleartext password with the hashed one
+	            password = hash;
+	            console.log("Hash : "+password);
+
+	            // Now insert record in db
+				db.collection('loginUsers').insert(
+					{
+						"name"     : name, 
+						"username" : username, 
+						"password" : password
+					},function(err,response){
+						if(err)
+							console.log(err); 
+						if(response){
+							res.redirect("/login");
+						}
+				});	
+
+	        });
 	});
 
-	// db.collection("users",function(err,collection){
-	// 	if(err) errmsg.push("Collection not found");
-	// 	else{
-	// 		collection.find(function(er,cursor){
-	// 			if(err)
-	// 				errmsg.push("failed to fetch records");
-	// 			else{
-	// 				cursor.each(function(cerr,doc){
-	// 					rows.push(doc);						
-	// 				});
-	// 				res.render("home.handlebars",{rows: rows});
-	// 			}
-	// 		});
-	// 	}
-	// });
 }
 
 exports.editForm = function(req,res){

@@ -1,0 +1,26 @@
+<div class="container">
+<div class="ui one column stackable center aligned page grid">
+  <div class="column six wide piled segment ui">
+    <h3>Login</h3>
+    {{#if errMsg}}
+    <div class="ui message negative">{{errMsg}}</div>
+    {{/if}}
+    <form class="ui form frmlogin" method="post" action="login">
+      <div class="field">
+        <div class="ui left icon input">
+            <input autocomplete="off" name="username" placeholder="Username" value="" type="text">
+            <i class="user icon"></i>
+        </div> 
+      </div>
+      <div class="field">
+        <div class="ui left icon input">
+            <input autocomplete="off" name="password" placeholder="Password" value="" type="password">
+            <i class="lock icon"></i>
+        </div>
+      </div>
+      <button class="ui button positive" type="submit">Submit</button>
+      <p>Dont have a account ? <a href="/register">Register here</a>
+    </form>
+  </div>
+</div>    
+</div>

@@ -1,6 +1,7 @@
 // Add requires
 var express = require('express');
 var bodyparser = require('body-parser');
+var session = require('express-session');
 var handlebars = require('express-handlebars');
 
 // Require routes
@@ -9,6 +10,7 @@ var app = express();
 
 // Set static path
 app.use(express.static(__dirname+"/public"));
+app.use(session({secret: "xpm#sfr", resave : true, saveUninitialized: false}));
 
 // Config handlebars
 app.set('view engine','handlebars');
@@ -20,6 +22,15 @@ app.use(bodyparser.urlencoded({extended:true}));
 
 // Set routes
 app.get('/',routes.home)
+
+app.get('/login',routes.login)
+app.post('/login',routes.loginSubmit)
+app.get('/logout',routes.logout)
+
+
+app.get('/register',routes.registerUser)
+app.post('/register',routes.registerSubmit)
+
 app.get('/add',routes.addForm)
 app.get('/edit/:uid',routes.editForm)
 app.post('/edit',routes.formAction)

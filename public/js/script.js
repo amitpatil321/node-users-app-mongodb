@@ -4,3 +4,32 @@ function deleteUser(uid) {
         document.location.href = "/delete/"+uid;
     }
 }
+$().ready(function(){
+    
+    $('.ui.form.frmlogin')
+      .form({
+        fields: {
+          username : 'empty',
+          password : 'empty'
+        }
+    });    
+
+    $('.ui.form.frmregister')
+      .form({
+        fields: {
+          name     : 'empty',
+          username : 'empty',
+          password : 'empty'
+        }
+    });    
+
+    $('.ui.form.frmadduser')
+      .form({
+        fields: {
+          name  : 'empty',
+          email : 'empty',
+          city  : 'empty'
+        }
+    });
+
+});    
