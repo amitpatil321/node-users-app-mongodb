@@ -1,12 +1,13 @@
 // Add requires
-var express = require('express');
+var express    = require('express');
 var bodyparser = require('body-parser');
-var session = require('express-session');
+var session    = require('express-session');
 var handlebars = require('express-handlebars');
+var flash      = require('connect-flash');
 
 // Require routes
-var routes = require("./routes/routes.js");
-var app = express();
+var routes     = require("./routes/routes.js");
+var app        = express();
 
 // Set static path
 app.use(express.static(__dirname+"/public"));

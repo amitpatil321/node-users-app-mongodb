@@ -128,7 +128,7 @@ exports.editForm = function(req,res){
 	    res.render("editUser.handlebars",{user: result});
 	});	
 }
-
+ 
 exports.addForm = function(req,res){
 	res.render("editUser.handlebars",{user: []});
 }
@@ -142,8 +142,9 @@ exports.formAction = function(req,res){
 	      {
 	        $set: { "name": req.body.name, "email": req.body.email, "city" : req.body.city },
 	      }, function(err, results) {
-	      	//console.log(results.result.nModified);
-	      	if(results.result.nModified){
+	      	//console.log(results.result);
+	      	if(results.result.ok){
+	      	//if(results.result.nModified){
 	      		res.redirect("/");
 	      	}
 	    });
