@@ -37,7 +37,7 @@ app.post('/edit',routes.formAction)
 app.get('/delete/:uid',routes.deleteUser)
 
 // Listen server request on given port
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 app.listen(port,function(){
-	console.log("Server started at port : 3000");
+	console.log("Server started at port : "+port);
 });
