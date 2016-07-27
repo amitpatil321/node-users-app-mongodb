@@ -23,7 +23,9 @@ exports.home = function(req,res){
 		db.collection("users").find().toArray(function(err, results) {
 			//if(err) console.log(err);
 			//console.log(req.session.sessuser);
-		    res.render("home.handlebars",{rows: results, user: req.session.sessuser});
+		    res.render("home.handlebars",{rows: results, user: req.session.sessuser, success : req.session.success});
+		    // Remove message in session
+		    delete req.session.success;
 		});
 	}
 }
@@ -33,8 +35,10 @@ exports.login = function(req,res){
 	// If user already logged in then go to home page
 	if(req.session.sessuser){
 		res.redirect("/");
-	}else
-		res.render("login.handlebars");
+	}else{
+		res.render("login.handlebars",{success:req.session.success});
+		delete req.session.success;
+	}
 }
 
 // Logout user
@@ -75,6 +79,7 @@ exports.loginSubmit = function(req,res){
 				}
 				else{
 					console.log("success");
+					req.session.success = "Welcome "+user.name;
 					res.redirect("/");					
 				}
 			});
@@ -113,6 +118,7 @@ exports.registerSubmit = function(req,res){
 						if(err)
 							console.log(err); 
 						if(response){
+							req.session.success = "Registration Successful, Please login to continue";
 							res.redirect("/login");
 						}
 				});	
@@ -144,7 +150,7 @@ exports.formAction = function(req,res){
 	      }, function(err, results) {
 	      	//console.log(results.result);
 	      	if(results.result.ok){
-	      	//if(results.result.nModified){
+	      		req.session.success = "User details updated successfully!";
 	      		res.redirect("/");
 	      	}
 	    });
@@ -159,6 +165,7 @@ exports.formAction = function(req,res){
 				if(err)
 					console.log(err); 
 				if(response){
+					req.session.success = "User added successfully!";
 					console.log("User inserted");
 					res.redirect("/");
 				}
@@ -171,4 +178,5 @@ exports.deleteUser = function(req,res){
 	db.collection("users").remove( { _id: ObjectID(req.params.uid)}, function(err,result){
 		res.redirect("/");
 	});
+	req.session.success = "User deleted successfully!";
 }

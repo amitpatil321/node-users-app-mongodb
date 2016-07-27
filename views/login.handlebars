@@ -2,6 +2,15 @@
 <div class="ui one column stackable center aligned page grid">
   <div class="column six wide piled segment ui">
     <h3>Login</h3>
+    {{#if success}}
+        <div class="ui success message">
+          <i class="close icon"></i>
+          <div class="header">
+            Success!
+          </div>
+          <p>{{success}}</p>
+        </div>
+    {{/if}}    
     {{#if errMsg}}
     <div class="ui message negative">{{errMsg}}</div>
     {{/if}}

@@ -32,4 +32,10 @@ $().ready(function(){
         }
     });
 
+    function explode(){
+      console.log("count");
+      $(".message").fadeOut("slow");
+    }
+    setTimeout(explode, 3000);
+
 });    

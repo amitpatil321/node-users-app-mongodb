@@ -1,4 +1,13 @@
 <div calss="container piled segment">
+ 	{{#if success}}
+		<div class="ui success message hid">
+		  <i class="close icon"></i>
+		  <div class="header">
+		    Success!
+		  </div>
+		  <p>{{success}}</p>
+		</div>
+	{{/if}}
 	<div class="ui">
 	  <div class="ui right aligned header">
 		{{#if user}}
