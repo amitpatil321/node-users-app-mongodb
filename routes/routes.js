@@ -4,7 +4,8 @@ var mongoclient = mongodb.MongoClient;
 var SALT = 10;
 // configure database
 var db = []; 
-mongoclient.connect("mongodb://127.0.0.1/",function(err,dbobj){
+//mongoclient.connect("mongodb://127.0.0.1/",function(err,dbobj){
+mongoclient.connect("mongodb://amitpatil:1Samsung@ds031915.mlab.com:31915/amitmongodb",function(err,dbobj){
 	if(err) console.log("Cant connect to database");
 	console.log("Database connection successful!");
 	db = dbobj.db("users");

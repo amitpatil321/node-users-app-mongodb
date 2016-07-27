@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Example demonstrating how to use mongo db with nodejs and express",
   "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },  
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
