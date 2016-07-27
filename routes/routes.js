@@ -59,7 +59,7 @@ exports.loginSubmit = function(req,res){
 
 		// if user does not exists then show error and exit
 		if(user == null){
-			errMsg = "Invalid username or password_";
+			errMsg = "Invalid username or password";
 			res.render("login.handlebars",{'errMsg': errMsg});
 		}
 		else{
