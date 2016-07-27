@@ -1,12 +1,22 @@
 <div calss="container piled segment">
-	<div class="ui right aligned">
+
+	<div class="ui">
+	  <div class="ui right aligned header">
 		{{#if user}}
 	   	Welcome {{user}}
-	    <a href="/logout" class="ui button teal">Logout</a>
+	    <a href="/logout" class="ui button teal right aligned">
+			<i class="sign out icon"></i>
+	    	Logout
+	    </a>
 	    {{/if}}
+	  </div>
 	</div>
+
 	<div class="ui left aligned">
-		<a href="/add" class="ui button positive">Add User</a>
+		<a href="/add" class="ui button positive">
+			<i class="add user icon"></i>
+			Add User
+		</a>
 	</div>
 
 	<table class="ui celled table">

@@ -22,7 +22,7 @@ exports.home = function(req,res){
 	}else{	
 		db.collection("users").find().toArray(function(err, results) {
 			//if(err) console.log(err);
-			console.log(req.session.sessuser);
+			//console.log(req.session.sessuser);
 		    res.render("home.handlebars",{rows: results, user: req.session.sessuser});
 		});
 	}
@@ -101,7 +101,7 @@ exports.registerSubmit = function(req,res){
 	            if (err) return next(err);
 	            // override the cleartext password with the hashed one
 	            password = hash;
-	            console.log("Hash : "+password);
+	            //console.log("Hash : "+password);
 
 	            // Now insert record in db
 				db.collection('loginUsers').insert(
