@@ -38,4 +38,9 @@ $().ready(function(){
     }
     setTimeout(explode, 3000);
 
-});    
+});
+
+Handlebars.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});

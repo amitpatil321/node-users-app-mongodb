@@ -136,7 +136,7 @@ exports.editForm = function(req,res){
 }
  
 exports.addForm = function(req,res){
-	res.render("editUser.handlebars",{user: []});
+	res.render("editUser.handlebarss",{user: []});
 }
 
 exports.formAction = function(req,res){

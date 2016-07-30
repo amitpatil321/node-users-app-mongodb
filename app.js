@@ -37,6 +37,18 @@ app.get('/edit/:uid',routes.editForm)
 app.post('/edit',routes.formAction)
 app.get('/delete/:uid',routes.deleteUser)
 
+// 404 error handling
+app.get('*', function(req, res){
+  res.status(404)
+  res.render('404.handlebars');
+});
+
+// Handle 500 error
+app.use(function(error, req, res, next) {
+    res.status(500)
+    res.render('500.handlebars')
+});
+
 // Listen server request on given port
 var port = process.env.PORT || 4000;
 app.listen(port,function(){
