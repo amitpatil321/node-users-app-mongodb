@@ -11,7 +11,7 @@ mongoclient.connect("mongodb://amit:amit@ds031915.mlab.com:31915/amitmongodb",fu
 	db = dbobj;
 });
 
-// pre save event
+// Home page
 exports.home = function(req,res){
 	var errmsg = [];
 	var rows = [];
@@ -136,7 +136,7 @@ exports.editForm = function(req,res){
 }
  
 exports.addForm = function(req,res){
-	res.render("editUser.handlebarss",{user: []});
+	res.render("editUser.handlebars",{user: []});
 }
 
 exports.formAction = function(req,res){
